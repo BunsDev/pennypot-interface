@@ -2,8 +2,10 @@ import { Avatar, Box, Button, Center, Container, Flex, Heading, Input, Link, Tex
 import { GradientButton } from '@/components/Buttons'
 import { primaryGradient, primaryBg } from '@/utils/consts';
 import { PInput } from '@/components/Inputs';
+import { useRouter } from 'next/router';
 
 const InvitePaget: React.FC = () => {
+    const router = useRouter();
     return (
         <Box
             height="100vh"
@@ -78,7 +80,9 @@ const InvitePaget: React.FC = () => {
 
                 </Container>
                 <Center mt={8}>
-                    <Link fontSize={"lg"} mt={4} color="gray.500" textAlign="center">
+                    <Link
+                        href='/'
+                        fontSize={"lg"} mt={4} color="gray.500" textAlign="center">
                         Skip to Home
                     </Link>
                 </Center>

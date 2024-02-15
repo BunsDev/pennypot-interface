@@ -1,9 +1,9 @@
 import { primaryBg, primaryGradient } from '@/utils/consts';
 import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack } from '@chakra-ui/react';
 
-const HomePage: React.FC = () => {
+const Home: React.FC = () => {
     return (
-        <Box>
+        <Box w="100%">
             {/* Navigation */}
             <Box
                 top={0}
@@ -128,4 +128,4 @@ const HomePage: React.FC = () => {
     );
 };
 
-export default HomePage;
+export default Home;

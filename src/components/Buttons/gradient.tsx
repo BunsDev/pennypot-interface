@@ -9,7 +9,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   children,
   ...rest
 }) => {
-  const gradient = `linear-gradient(to right, ${background.join(', ')})`;
+  const gradient = `linear-gradient(to top, ${background.join(', ')})`;
   const hoverGradient = `linear-gradient(to right, ${background
     .map(color => `${color}88`)
     .join(', ')})`;
@@ -23,7 +23,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       h={["50px", "50px", "50px", "70px"]}
       fontSize={["md", "lg", "lg", "2xl"]}
       borderRadius={["25px", "25px", "25px", "50px"]}
-      w={"250px"}
+      w={"300px"}
       // borderRadius={"25px"}
       _hover={{ bg: hoverBg }}
       color="white"
