@@ -4,34 +4,18 @@ import { primaryGradient, primaryBg } from '@/utils/consts';
 import { PInput } from '@/components/Inputs';
 import { useRouter } from 'next/router';
 
-const InvitePaget: React.FC = () => {
+const InvitePage: React.FC = () => {
     const router = useRouter();
     return (
         <Box
             height="100vh"
             backgroundColor={primaryBg}
         >
-            <Box px={4}>
-                <Flex px={3} py={2} align="center" justify="flex-end" mb={4}>
+            <VStack
+                h="100%"
+                justifyContent={"center"}
+                px={4}>
 
-                    <Button
-                        bg='white'
-                        py={4}
-                        px={8}
-                    >
-                        <Box
-                            bgGradient="linear(to-r, blue.400, green.400)"
-                            p={2}
-                            borderRadius="full"
-                            mr={2}
-                        >
-                            {/* Icon for Pot */}
-                            <Text>Icon</Text>
-                        </Box>
-                        <Text fontSize="xl">User</Text>
-                    </Button>
-
-                </Flex>
 
 
                 <Container
@@ -55,17 +39,12 @@ const InvitePaget: React.FC = () => {
                         <Heading >Quest Invite</Heading>
                     </Center>
 
-                    <VStack mt={12} w='100%' align={"flex-start"}>
+                    <Text my={8} textAlign={"left"} mb={2}>Pot Address or IPFS hash</Text>
 
-                        <Text textAlign={"left"} mb={2}>Pot Address</Text>
-                        {/* <Input
-                            variant="filled"
-                            placeholder="0x...xxx"
-                            size="lg"
-                            mb={4}
-                        /> */}
+                    <VStack w='100%' align={"center"}>
 
                         <PInput
+                            borderRadius={["25px", "25px", "25px", "50px"]}
                             placeholder="0x...xxx"
                             gradientBorderColor="linear(to-r, blue.400, green.400)"
                             mb={4}
@@ -74,11 +53,12 @@ const InvitePaget: React.FC = () => {
                         <GradientButton
                             background={primaryGradient}
                         >
-                            Join Quest
+                            Join
                         </GradientButton>
                     </VStack>
 
                 </Container>
+
                 <Center mt={8}>
                     <Link
                         href='/'
@@ -86,9 +66,9 @@ const InvitePaget: React.FC = () => {
                         Skip to Home
                     </Link>
                 </Center>
-            </Box>
+            </VStack>
         </Box >
     );
 };
 
-export default InvitePaget;
+export default InvitePage;
