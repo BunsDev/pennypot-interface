@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Box, Button, Center, IconButton, Text, VStack } from '@chakra-ui/react';
 import { FaChevronDown } from "react-icons/fa";
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
+import { useEthereum, useConnect, useAuthCore,  } from '@particle-network/auth-core-modal';
 import { Avalanche, AvalancheTestnet } from '@particle-network/chains';
 import { AAWrapProvider, SendTransactionMode, SmartAccount } from '@particle-network/aa';
 import { ethers } from 'ethers';

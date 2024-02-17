@@ -1,10 +1,11 @@
-import Head from "next/head";
+import { useEffect } from "react";
 import { Box, Center } from "@chakra-ui/react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import { useAppContext } from "@/contexts/globalContext";
 import SplashScreen from "@/components/Loaders/splashscreen";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useEthereum, useConnect, useAuthCore } from "@particle-network/auth-core-modal";
+import { useConnect } from "@particle-network/auth-core-modal";
 import Home from "@/components/Home";
 
 
@@ -12,9 +13,7 @@ export default function IndexPage() {
 
   const router = useRouter();
   const { showSplashScreen, setShowSplashScreen } = useAppContext();
-  const { provider } = useEthereum();
-  const { connect, disconnect, connected } = useConnect();
-  const { userInfo } = useAuthCore();
+  const { connected } = useConnect();
 
   useEffect(() => {
 
@@ -31,6 +30,9 @@ export default function IndexPage() {
 
   }, [connected]);
 
+
+
+
   return (
     <>
       <Head>
@@ -41,7 +43,7 @@ export default function IndexPage() {
       </Head>
 
 
-      <main>
+      <main className="body">
         {showSplashScreen && (
           <Box w="100%" h="100vh">
             <SplashScreen />

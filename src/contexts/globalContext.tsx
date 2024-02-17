@@ -1,4 +1,3 @@
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
@@ -6,27 +5,62 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 type AppContextType = {
     showSplashScreen: boolean;
     setShowSplashScreen: React.Dispatch<React.SetStateAction<boolean>>;
+    selectedWallet: string | null;
+    setSelectedWallet: React.Dispatch<React.SetStateAction<string | null>>;
+    showWallet: boolean;
+    setShowWallet: React.Dispatch<React.SetStateAction<boolean>>;
+    user: any | null;
+    setUser: React.Dispatch<React.SetStateAction<any | null>>;
+    balance: number;
+    setBalance: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 type AppProviderProps = {
     children: ReactNode;
+    set: any
 };
 
-export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+export const AppProvider: React.FC<AppProviderProps> = ({ children, set }: any) => {
     const router = useRouter();
 
     // App states
     const [showSplashScreen, setShowSplashScreen] = useState(true);
-    const { provider } = useEthereum();
-    const { connect, disconnect, connected } = useConnect();
-    const { userInfo } = useAuthCore();
+    const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
+    const [isConnected, setIsConnected] = useState(false);
+    const [showWallet, setShowWallet] = useState(false)
+    const [user, setUser] = useState<any | null>(null);
+    const [balance, setBalance] = useState<number>(0);
+
+
+
+    useEffect(() => {
+        // const x = localStorage.getItem("showWallet")
+        if (showWallet) {
+            if (showWallet) {
+                set(true);
+            } else {
+                set(false)
+            }
+        }
+    }, [showWallet])
+
+
+
 
 
     const contextValue: AppContextType = {
         showSplashScreen,
-        setShowSplashScreen
+        setShowSplashScreen,
+        selectedWallet,
+        setSelectedWallet,
+        showWallet,
+        setShowWallet,
+        user,
+        setUser,
+        balance,
+        setBalance
     };
 
     return (

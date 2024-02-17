@@ -52,8 +52,7 @@ const InvitePage: React.FC = () => {
 
                         <GradientButton
                             background={primaryGradient}
-                        >
-                            Join
+                        > Join
                         </GradientButton>
                     </VStack>
 
