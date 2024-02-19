@@ -41,7 +41,6 @@ const IntroPage: React.FC = () => {
     };
 
 
-
     useEffect(() => {
         if (connected) {
             setLoading(true)

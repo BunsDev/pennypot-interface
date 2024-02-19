@@ -10,6 +10,7 @@ import { GoldRushProvider } from "@covalenthq/goldrush-kit";
 import { AppProvider } from "@/contexts/globalContext";
 import { useEffect, useState } from "react";
 import { COVALENT_API_KEY } from "@/utils/consts";
+import { ModalProvider } from "@/contexts/modalContext";
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -41,7 +42,9 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <ChakraProvider resetCSS={true}>
           <GoldRushProvider apikey={COVALENT_API_KEY || ""} mode={mode} color={"slate"} border_radius={"medium"}>
-            <Component {...pageProps} />
+            <ModalProvider>
+              <Component {...pageProps} />
+            </ModalProvider>
           </GoldRushProvider>
         </ChakraProvider>
       </AuthCoreContextProvider>

@@ -9,24 +9,27 @@ import {
 import { useAppContext } from '@/contexts/globalContext';
 import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { COVALENT_API_KEY } from '@/utils/consts';
 
 
 
 const TokenTable = () => {
     const { provider, chainInfo } = useEthereum();
-    const { user } = useAppContext()
+    const { user, chainName, setChainName } = useAppContext()
     const { connect, disconnect, connected, } = useConnect();
     const { chains } = useCovalent()
-    const [chainName, setChainName] = useState("")
     const router = useRouter()
 
     useEffect(() => {
-        if (chainInfo && chains && user) {
+        if (chainInfo && chains && user && chainName.length < 2) {
             const x = chains?.filter((x) => Number(x.chain_id) === chainInfo.id)[0]
-            console.log("chain info", user.smartWallet)
+            console.log("chain name", x.name)
             setChainName(x.name)
+            // const sampleToken = '0x88233eEc48594421FA925D614b3a94A2dDC19a08'
+            // const c = ` https://api.covalenthq.com/v1/${x.name}/address/${user.smartWallet}/balances_v2/?key=${COVALENT_API_KEY}`
+
         }
-    }, [])
+    }, [chainInfo, chains, chainName])
 
     if (!user) { return }
 
@@ -43,6 +46,7 @@ const TokenTable = () => {
                         chain_names={[chainName]}
                         address={user.smartWallet}
                         // hide_small_balances
+
                         on_transfer_click={(e: any) => {
                             router.push(`/transfers/${e.chain_name}/${e.contract_address}`)
                         }}

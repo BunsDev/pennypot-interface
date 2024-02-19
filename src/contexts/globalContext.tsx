@@ -13,6 +13,8 @@ type AppContextType = {
     setUser: React.Dispatch<React.SetStateAction<any | null>>;
     balance: number;
     setBalance: React.Dispatch<React.SetStateAction<number>>;
+    chainName: string;
+    setChainName: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -32,7 +34,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children, set }: any) 
     const [showWallet, setShowWallet] = useState(false)
     const [user, setUser] = useState<any | null>(null);
     const [balance, setBalance] = useState<number>(0);
-
+    const [chainName, setChainName] = useState("")
 
 
     useEffect(() => {
@@ -60,7 +62,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children, set }: any) 
         user,
         setUser,
         balance,
-        setBalance
+        setBalance,
+        chainName,
+        setChainName
     };
 
     return (

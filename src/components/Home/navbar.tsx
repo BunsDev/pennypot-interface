@@ -3,21 +3,25 @@ import { useEffect, useState } from 'react';
 import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip } from '@chakra-ui/react';
 import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
 import { FaGithub } from 'react-icons/fa';
+import { useAppContext } from '@/contexts/globalContext';
+import { useModalProvider } from '@/contexts/modalContext';
 
 
 const NavBar: React.FC = () => {
 
 
+    const { } = useAppContext();
     const { provider } = useEthereum();
     const { connect, disconnect, connected } = useConnect();
     const { userInfo } = useAuthCore();
     const [user, setUser] = useState<any | null>(null);
+    const { isOpen } = useModalProvider();
 
 
     return (
         <>
             <Box
-                zIndex={"tooltip"}
+                zIndex={isOpen ? "0" : "tooltip"}
                 top={0}
                 bg="white"
                 pb={4}
@@ -57,7 +61,7 @@ const NavBar: React.FC = () => {
                         <Link>Tab 3</Link> */}
                     </HStack>
                 </Flex>
-            </Box>
+            </Box >
         </>
     );
 };

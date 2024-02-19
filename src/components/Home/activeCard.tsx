@@ -49,6 +49,7 @@ const ActiveCard = () => {
             email: userInfo.thirdparty_user_info?.user_info.email,
             particleWallet: await smartAccount.getOwner(),
             smartWallet: await smartAccount.getAddress(),
+            smartAccount: smartAccount
         }
         setUser(obj)
         setBalance(parseFloat(ethers.utils.formatEther(balanceResponse)));
