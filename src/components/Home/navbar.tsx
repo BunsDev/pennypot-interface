@@ -28,26 +28,36 @@ const NavBar: React.FC = () => {
                 boxShadow={"sm"}
                 position={"fixed"}
                 w="100%"
-                borderBottom={"2px solid red"}
+                borderBottom={"none"}
             >
 
                 <Flex
-                    bg="#8528c4"
+                    bg="#004e7d"
                     color='white'
                     direction="row"
                     justify="space-between"
+                    alignItems={"flex-end"}
                     align={"center"}
                     px={[4, 4, 12]}
                     height="60px">
 
                     {/* Logo or Brand */}
                     <Box>
-                        <Text fontSize="xl" fontWeight="bold"> Penny Pot</Text>
+                        <Box
+                            bottom={0}
+                            h="60px"
+                            as="img"
+                            src="/logohead.png"
+                        />
+
+
 
                     </Box>
 
                     {/* Links */}
-                    <HStack spacing={5}>
+                    <HStack spacing={5}
+                        pb={4}
+                    >
                         <HStack
                             cursor={"pointer"}
                             target="_blank"

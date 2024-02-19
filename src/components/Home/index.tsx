@@ -46,9 +46,9 @@ const Home: React.FC = () => {
 
             <NavBar />
 
-            {/* <Banner
+            <Banner
                 title='Your Account'
-            /> */}
+            />
 
             <VStack
                 py={8}

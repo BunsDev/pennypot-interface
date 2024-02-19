@@ -60,20 +60,22 @@ const QuestTable = () => {
                 const clone = _clones[i];
                 const potContract = new ethers.Contract(_clones[i], sagelockABI, signer);
                 const whitelists = await potContract.getWhitelistedTokens();
-                console.log("direct whitelist", whitelists);
+
                 let _tokens = [];
                 for (let i = 0; i < whitelists.length; i++) {
                     const addr = whitelists[i];
                     const tokenContract = new ethers.Contract(addr, tokenABI, signer);
                     const symbol = await tokenContract.symbol();
                     const userStatus = await potContract.getTokenDetails(addr, await smartAccount.getAddress())
+
                     const tokenObj = {
                         address: addr,
                         symbol: symbol,
                         status: userStatus[0],
-                        share: Number(userStatus[1]),
-                        SN: Number(userStatus[2]),
+                        share: (Number(userStatus[2] / 1e18).toFixed(3)),
+                        SN: Number(userStatus[3]),
                     }
+                    console.log("user stat", userStatus);
                     _tokens.push(tokenObj)
                 }
                 const obj = {

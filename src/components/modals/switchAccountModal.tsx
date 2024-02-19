@@ -66,7 +66,7 @@ const SwitchAccountModal = ({ isOpen, onClose }
                                 borderRadius="18px"
                                 px={3}
                                 py={1.5}
-                                bgColor={selectedWallet && selectedWallet === defaultWallet ? 'purple.100' : 'transparent'}
+                                bgColor={selectedWallet && selectedWallet === defaultWallet ? '#d9f0f8' : 'transparent'}
                                 _hover={{ bgColor: 'gray.100' }}
                             >
                                 <HStack
@@ -104,7 +104,7 @@ const SwitchAccountModal = ({ isOpen, onClose }
                                     borderRadius="18px"
                                     px={3}
                                     py={1.5}
-                                    bgColor={selectedWallet && selectedWallet === user.smartWallet ? 'purple.100' : 'transparent'}
+                                    bg="#d9f0f8"
                                     _hover={{ bgColor: 'gray.100' }}
                                 >
                                     <HStack
@@ -124,7 +124,7 @@ const SwitchAccountModal = ({ isOpen, onClose }
                                                 <BiCopy size={24} opacity={0.3} fontWeight="semibold" />
                                             </Button>
                                             {showTooltip2 && selectedWallet && selectedWallet === user.smartWallet && (
-                                                <Tooltip label="Selected" isOpen={true} placement="top">
+                                                <Tooltip label="copied" isOpen={true} placement="top">
                                                     <Box />
                                                 </Tooltip>
                                             )}

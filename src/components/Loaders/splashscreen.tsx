@@ -27,11 +27,12 @@ const SplashScreen = () => {
             animate={{ opacity: 1, transition: { ease: "easeIn", duration: 1 } }}
         >
             <Box
+            //  bg="#013b5f"
                 zIndex="tooltip"
                 w="100%"
                 position={"absolute"}
                 h="100%"
-                bgGradient="linear(to bottom, white, purple.50)"
+                bgGradient="linear(to bottom, black, #013b5f)"
                 textAlign="center"
                 fontSize="xl">
 

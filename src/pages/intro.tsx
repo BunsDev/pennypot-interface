@@ -78,14 +78,14 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            {/* <Box
+
+                            <Box
                                 as="img"
-                                h="200px"
-                                w="200px"
-                                src={"/lo.png"}
-                            /> */}
+                                src="/welcome.png"
+
+                            />
                             <Text
-                                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                bgGradient="linear(to-l, #7928CA, #006699)"
                                 bgClip='text'
                                 fontSize="5xl" fontWeight="bold" mb="4">
                                 Welcome to a new Era of Saving!
@@ -108,8 +108,13 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="4xl" fontWeight="bold" mb="4">
-                                It's as easy as eating a pie  <span
+                            <Box
+                                as="img"
+                                src="/pie.png"
+
+                            />
+                            <Text fontSize="4xl" color="#006699" fontWeight="bold" mb="4">
+                                It's as easy as eating this pie  <span
                                     style={{
                                         fontSize: "64px"
                                     }}
@@ -142,11 +147,14 @@ const IntroPage: React.FC = () => {
                                         fontSize: "64px"
                                     }}
                                 >
-
                                     👩‍👧‍👦
                                 </span>
                             </Text>
+                            <Box
+                                as="img"
+                                src="/grab.png"
 
+                            />
 
                         </Box>
                     </motion.div>
@@ -170,8 +178,14 @@ const IntroPage: React.FC = () => {
                                         fontSize: "64px"
                                     }}
                                 >
-
                                     💎📦💰
+
+                                    <Box
+                                        as="img"
+                                        src="/complete.png"
+
+                                    />
+
                                 </span>
                             </Box>
                         </Box>
@@ -185,16 +199,24 @@ const IntroPage: React.FC = () => {
                         transition={{ duration: 1, delay: 13 }}
                         style={{ display: currentScene === 5 ? 'block' : 'none' }}
                     >
-                        <Box textAlign="center">
+                        <Box textAlign="center" position={"relative"}>
+
+                            <Box
+                                ml={64}
+                                position={"absolute"}
+                                as="img"
+                                src="/go.png"
+                            />
                             <Text
-                                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                bgGradient="linear(to-l, #7928CA, #006699)"
                                 fontWeight={"bold"}
                                 bgClip='text'
                                 fontSize="xl" mb="8">
                                 Let's go fabulous
                                 <span
                                     style={{
-                                        fontSize: "64px"
+                                        fontSize: "64px",
+                                        visibility: "hidden"
                                     }}
                                 >
                                     💪

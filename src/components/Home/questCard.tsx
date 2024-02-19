@@ -92,11 +92,11 @@ const QuestCard = () => {
                         <HStack w="100%" justify="space-between" mt={8}>
                             <Button
                                 opacity={0.7}
-                                bg="purple.100"
-                                color={"purple.500"}
+                                bg="#d9f0f8"
+                                color={"blue.500"}
                                 _hover={{
-                                    bg: "purple.100",
-                                    color: "purple.500"
+                                    bg: "#d9f0f8",
+                                    color: "blue.500"
                                 }}
                                 leftIcon={<IoAddCircleOutline />}
                                 onClick={() => {
@@ -106,11 +106,11 @@ const QuestCard = () => {
                                 h="50px" w="100%" colorScheme="blue">Create New Quest</Button>
                             <Button
                                 opacity={0.7}
-                                bg="purple.100"
-                                color={"purple.500"}
+                                bg="#d9f0f8"
+                                color={"blue.500"}
                                 _hover={{
-                                    bg: "purple.100",
-                                    color: "purple.500"
+                                    bg: "#d9f0f8",
+                                    color: "blue.500"
                                 }}
                                 leftIcon={<GiJoin />}
                                 onClick={() => {

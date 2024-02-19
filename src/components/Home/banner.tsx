@@ -6,18 +6,27 @@ const Banner = ({ title }: { title: string }) => {
     return (
         <>
             <Box
-                bg="#8528c4"
+                bgColor="#004e7d"
+
                 color="white"
                 mt={20}
                 h="20vh"
                 px={[4, 4, 12]}
+
             >
                 <VStack
                     h="100%"
                     justify="center"
+                    bg="url('/pennyHeader.png')"
+                    backgroundSize="fit-height"
+                    backgroundPosition="center"
                     align={"flex-start"}
+                    backgroundRepeat={"no-repeat"}
+
                 >
-                    <Heading fontWeight="bold">{title}</Heading>
+
+
+                    {/* <Heading fontWeight="bold">{title}</Heading> */}
                 </VStack>
 
             </Box>
