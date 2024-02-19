@@ -150,8 +150,7 @@ const CreateNewQuestModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: an
                 selectedTokens.map((x: any) => x.address)
             ];
 
-            console.log(methodParams)
-            return
+            // console.log(methodParams)
 
             const data = contract.interface.encodeFunctionData(methodName, methodParams);
             const tx = {
@@ -168,41 +167,17 @@ const CreateNewQuestModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: an
         } catch (e) {
             console.log(e);
             setLoading(false)
-            toast({
-                status: "error",
-                title: "Error",
-                description: e as string
+            // toast({
+            //     status: "error",
+            //     title: "Error",
+            //     description: e as string
 
-            })
+            // })
 
         }
 
 
     }
-
-    const executeUserOp = async () => {
-        const smartAccount = new SmartAccount(provider, {
-            projectId: process.env.NEXT_PUBLIC_PROJECT_ID!,
-            clientKey: process.env.NEXT_PUBLIC_CLIENT_KEY!,
-            appId: process.env.NEXT_PUBLIC_APP_ID!,
-            aaOptions: {
-                simple: [{ chainId: AvalancheTestnet.id, version: '1.0.0' }]
-            }
-        });
-
-        const customProvider = new ethers.providers.Web3Provider(new AAWrapProvider(smartAccount, SendTransactionMode.Gasless), "any");
-
-        const signer = customProvider.getSigner();
-        // console.log(signer)
-        const tx = {
-            to: "0x000000000000000000000000000000000000dEaD",
-            value: ethers.utils.parseEther("0.0001"),
-        };
-        const txResponse = await signer.sendTransaction(tx);
-        const txReceipt = await txResponse.wait();
-        console.log(`https://subnets-test.avax.network/c-chain/tx/${txReceipt.transactionHash}`)
-    };
-
 
 
     useEffect(() => {

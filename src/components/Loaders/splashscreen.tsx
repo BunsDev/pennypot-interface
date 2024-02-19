@@ -31,12 +31,12 @@ const SplashScreen = () => {
                 w="100%"
                 position={"absolute"}
                 h="100%"
-                bgGradient="linear(to bottom, black, #111e1d)"
+                bgGradient="linear(to bottom, white, purple.50)"
                 textAlign="center"
                 fontSize="xl">
 
                 <VStack h="100%" justifyContent="center" spacing={8}>
-                    <Logo h="100px" pointerEvents="none" />
+                    <Logo h="200px" pointerEvents="none" />
                     <>
                         <Center
                             display={!showSpinner ? "hide" : "flex"}

@@ -33,7 +33,7 @@ export const Logo = forwardRef<ImageProps, "img">((props, ref) => {
     >
       <motion.img
         //@ts-ignore
-        src={"/google.png"}
+        src={"/logo.png"}
         alt="Logo"
         initial={{ scale: 0.2 }} // Initial scale down
         animate={{ scale: 0.4, transition: { type: "spring", stiffness: 100, damping: 10, duration: 1, delay: 0.5 } }} // Scale up with floating animation

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Box, Button, Center, IconButton, Text, VStack } from '@chakra-ui/react';
 import { FaChevronDown } from "react-icons/fa";
-import { useEthereum, useConnect, useAuthCore,  } from '@particle-network/auth-core-modal';
+import { useEthereum, useConnect, useAuthCore, } from '@particle-network/auth-core-modal';
 import { Avalanche, AvalancheTestnet } from '@particle-network/chains';
 import { AAWrapProvider, SendTransactionMode, SmartAccount } from '@particle-network/aa';
 import { ethers } from 'ethers';
@@ -78,12 +78,21 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="4xl" fontWeight="bold" mb="4">
-                                Placeholder 1
+                            {/* <Box
+                                as="img"
+                                h="200px"
+                                w="200px"
+                                src={"/lo.png"}
+                            /> */}
+                            <Text
+                                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                bgClip='text'
+                                fontSize="5xl" fontWeight="bold" mb="4">
+                                Welcome to a new Era of Saving!
                             </Text>
-                            <Text fontSize="xl" mb="8">
+                            {/* <Text fontSize="xl" mb="8">
                                 Welcome to Penny's Pot!
-                            </Text>
+                            </Text> */}
                         </Box>
                     </motion.div>
 
@@ -99,8 +108,15 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="xl" mb="8">
-                                Savings is as easy as pie...
+                            <Text fontSize="4xl" fontWeight="bold" mb="4">
+                                It's as easy as eating a pie  <span
+                                    style={{
+                                        fontSize: "64px"
+                                    }}
+                                >
+
+                                    🥧
+                                </span>
                             </Text>
                         </Box>
                     </motion.div>
@@ -117,9 +133,21 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="xl" mb="8">
-                                Grab your pals
+
+                            <Text fontSize="4xl" fontWeight="bold" mb="4">
+                                Grab your frens
+
+                                <span
+                                    style={{
+                                        fontSize: "64px"
+                                    }}
+                                >
+
+                                    👩‍👧‍👦
+                                </span>
                             </Text>
+
+
                         </Box>
                     </motion.div>
 
@@ -135,9 +163,17 @@ const IntroPage: React.FC = () => {
                         }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="xl" mb="8">
-                                And chase quests together!
-                            </Text>
+                            <Box fontSize="4xl" fontWeight="bold" mb="4">
+                                And complete quests together
+                                <span
+                                    style={{
+                                        fontSize: "64px"
+                                    }}
+                                >
+
+                                    💎📦💰
+                                </span>
+                            </Box>
                         </Box>
                     </motion.div>
 
@@ -150,8 +186,19 @@ const IntroPage: React.FC = () => {
                         style={{ display: currentScene === 5 ? 'block' : 'none' }}
                     >
                         <Box textAlign="center">
-                            <Text fontSize="xl" mb="8">
-                                Let's go  fabulous!
+                            <Text
+                                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                fontWeight={"bold"}
+                                bgClip='text'
+                                fontSize="xl" mb="8">
+                                Let's go fabulous
+                                <span
+                                    style={{
+                                        fontSize: "64px"
+                                    }}
+                                >
+                                    💪
+                                </span>
                             </Text>
                             <VStack>
                                 <GradientButton

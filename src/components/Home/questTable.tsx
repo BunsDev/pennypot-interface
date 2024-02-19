@@ -146,7 +146,7 @@ const QuestTable = () => {
             const methodName = "approve";
             const methodParams = [
                 pot,
-                10000,
+                ethers.utils.parseEther("10000"),
             ];
 
             //approval txn
