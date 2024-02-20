@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Select, Text, Button, Center, useToast, HStack } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Select, Spinner, Text, Button, Center, useToast, HStack, useDisclosure } from '@chakra-ui/react';
 import pennypotABI from "@/utils/penyypot.json";
 import sagelockABI from "@/utils/safeLock.json";
 import tokenABI from "@/utils/token.json";
-import { CONSUMER_ADDRESS, PENNYPOT_ADDRESS, SAFELOCK_ADDRESS, strategies } from '@/utils/consts';
+import { CONSUMER_ADDRESS, PENNYPOT_ADDRESS, PotToken, SAFELOCK_ADDRESS, strategies } from '@/utils/consts';
 import { AAWrapProvider, SendTransactionMode, SmartAccount } from '@particle-network/aa';
 import { AvalancheTestnet } from '@particle-network/chains';
 import { useEthereum } from '@particle-network/auth-core-modal';
@@ -13,19 +13,26 @@ import { useAppContext } from '@/contexts/globalContext';
 import { shortenAddress } from '@/utils/helpers';
 import axios from 'axios';
 import { FaEye } from 'react-icons/fa';
+import SavingsPotModal from '../modals/savingsPot';
+
+
 
 
 
 const QuestTable = () => {
     const { provider } = useEthereum();
-    const { user, chainName } = useAppContext()
+    const { user } = useAppContext()
     const [clones, setClones] = useState<string[] | null>(null);
     const [fetchingSavings, setFetchingSavings] = useState(false);
     const [quests, setQuests] = useState<any[] | null>(null)
     const [selectedTokens, setSelectedTokens] = useState<string[]>([]);
+    const { isOpen, onClose, onOpen } = useDisclosure();
+    const [selectedQuestToken, setSelectedQuestToken] = useState<any | PotToken>(null)
+    const [loading, setLoading] = useState(false);
 
     const toast = useToast();
-    // handle token change for a specific quest
+
+
     const handleTokenChange = (event: React.ChangeEvent<HTMLSelectElement>, index: number) => {
         const newSelectedTokens = [...selectedTokens];
         newSelectedTokens[index] = event.target.value;
@@ -71,8 +78,10 @@ const QuestTable = () => {
                         address: addr,
                         symbol: symbol,
                         status: userStatus[0],
+                        timestamp: Number(userStatus[1]),
                         share: (Number(userStatus[2] / 1e18).toFixed(3)),
                         SN: Number(userStatus[3]),
+
                     }
                     console.log("user stat", userStatus);
                     _tokens.push(tokenObj)
@@ -100,8 +109,6 @@ const QuestTable = () => {
         }
     }, [fetchingSavings, user, clones]);
 
-
-    // Initialize selected tokens with the first token in each quest
     useEffect(() => {
         if (quests) {
             const initialSelectedTokens = quests.map((quest) => quest.tokens[0].address);
@@ -124,9 +131,7 @@ const QuestTable = () => {
         console.log(token)        // return
         const _contractAddress = PENNYPOT_ADDRESS as string;
         const abi = pennypotABI;
-        if (_contractAddress.length < 2) {
-            console.log("invalid penny contract address")
-        }
+        setLoading(true);
         try {
             const smartAccount = new SmartAccount(provider, {
                 projectId: process.env.NEXT_PUBLIC_PROJECT_ID!,
@@ -181,75 +186,110 @@ const QuestTable = () => {
             }
             //@ts-ignore
             const txResponse = await smartAccount.sendTransaction(tx);
-            // console.log(`https://subnets-test.avax.network/c-chain/tx/${txResponse}`)
-
+            console.log(`Opt in transaction Complete. https://subnets-test.avax.network/c-chain/tx/${txResponse}`)
+            alert(`Opt in complete. Refresh page`);
+            setLoading(false)
 
         } catch (e: any) {
+            setLoading(false)
             console.error("error otpin in clones", e.message);
-            toast({
-                status: "error",
-                title: "Error",
-                description: e.message
-            });
+            alert(e.message);
+            // toast({
+            //     status: "error",
+            //     title: "Error",
+            //     description: e.message
+            // });
         }
     }
 
 
 
     return (
-        <Table mt={4} fontSize="sm" variant="simple" colorScheme="gray">
-            <Thead>
-                <Tr>
-                    <Th>Quest</Th>
-                    <Th>Address</Th>
-                    <Th>Tokens</Th>
-                    <Th>Balance</Th>
-                    <Th>Status</Th>
-                </Tr>
-            </Thead>
+        <>
+
+            <Table mt={4} fontSize="sm" variant="simple" colorScheme="gray">
+                <Thead>
+                    <Tr>
+                        <Th>Quest</Th>
+                        <Th>Address</Th>
+                        <Th>Tokens</Th>
+                        <Th>Balance</Th>
+                        <Th>Status</Th>
+                    </Tr>
+                </Thead>
 
 
-            <Tbody>
-                {quests && quests.map((quest, index) => (
-                    <Tr key={index}>
-                        <Td>{strategies.find((x) => x.address?.toLowerCase() === quest.strategy?.toLocaleLowerCase())?.name || "UNKNOWN"}</Td>
-                        <Td>{shortenAddress(quest.clone)}</Td>
-                        <Td>
-                            <Select w="100px" value={selectedTokens[index]} onChange={(e) => handleTokenChange(e, index)}>
-                                {quest.tokens.map((token: any) => (
-                                    <option key={token.address} value={token.address}>
-                                        {token.symbol}
-                                    </option>
-                                ))}
-                            </Select>
-                        </Td>
-                        <Td>
-                            {quest.tokens.find((token: any) => token.address === selectedTokens[index])?.share!}
-                        </Td>
+                <Tbody>
+                    {quests && quests.length > 0 && quests.map((quest, index) => (
+                        <Tr key={index}>
+                            <Td>{strategies.find((x) => x.address?.toLowerCase() === quest.strategy?.toLocaleLowerCase())?.name || "UNKNOWN"}</Td>
+                            <Td>{shortenAddress(quest.clone)}</Td>
+                            <Td>
+                                <Select w="100px" value={selectedTokens[index]} onChange={(e) => handleTokenChange(e, index)}>
+                                    {quest.tokens.map((token: any) => (
+                                        <option key={token.address} value={token.address}>
+                                            {token.symbol}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </Td>
+                            <Td>
+                                {quest.tokens.find((token: any) => token.address === selectedTokens[index])?.share!}
+                            </Td>
 
-                        <Td>
-                            {quest.tokens.some((token: any) => token.status) ? <>
-                                <HStack>
+                            <Td>
+                                {quest.tokens.find((token: any) => token.address === selectedTokens[index])?.status ? <>
                                     <Button
+                                        size={"sm"}
                                         colorScheme='green'
                                         bg="green.500"
+                                        fontSize={"xs"}
                                         rightIcon={<FaEye />}
+                                        onClick={() => {
+                                            const _token = quest.tokens.find((token: any) => token.address === selectedTokens[index]);
+                                            const obj = {
+                                                ..._token,
+                                                quest
+                                            }
+                                            setSelectedQuestToken(obj);
+                                            console.log("checked", obj)
+                                            onOpen();
+                                        }}
                                     >Active</Button>
+                                </>
 
-                                </HStack>
-                            </>
+                                    : (
+                                        <Center>
+                                            <Button 
+                                            isLoading={loading}
+                                            onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
+                                        </Center>
+                                    )}
+                            </Td>
+                        </Tr>
+                    ))}
+
+                    {quests && quests.length < 1 && (
+                        <>
+                            <Text fontSize={"sm"} opacity={0.7}>No Quests Created</Text>
+                        </>
+                    )}
+
+                    {!quests && (
+                        <Center>
+                            <Spinner />
+                        </Center>
+                    )}
 
 
-                                : (
-                                    <Center>
-                                        <Button onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
-                                    </Center>
-                                )}
-                        </Td>
-                    </Tr>
-                ))}
-            </Tbody>
-        </Table>
+                </Tbody>
+            </Table>
+
+            {selectedQuestToken && (
+                <SavingsPotModal isOpen={isOpen} onClose={onClose} savingsPotDetails={selectedQuestToken} />
+            )}
+
+        </>
     );
 };
 

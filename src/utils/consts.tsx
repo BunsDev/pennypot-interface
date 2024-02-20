@@ -22,5 +22,14 @@ export const strategies = [
         name: "Yield vault",
         address: null,
     },
-
 ]
+
+export interface PotToken {
+    quest: string,
+    address: string
+    Timestamp: number;
+    totalSupply: number;
+    share: number;
+    allowance: number;
+}
+

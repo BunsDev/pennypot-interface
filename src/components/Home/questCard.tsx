@@ -77,7 +77,7 @@ const QuestCard = () => {
                     </>
 
                     <Container
-                        px={4}
+                        px={2}
                         h="fit-content"
                         w="100%"
                         mt={0}
@@ -122,7 +122,8 @@ const QuestCard = () => {
                         </HStack>
 
                         <Box
-                            overflowX={"auto"}
+                            w="100%"
+                            overflowX={["auto", "auto", "hidden"]}
                         >
                             <QuestTable />
                         </Box>

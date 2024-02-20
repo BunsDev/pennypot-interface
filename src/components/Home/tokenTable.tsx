@@ -45,16 +45,12 @@ const TokenTable = () => {
                     <TokenBalancesListView
                         chain_names={[chainName]}
                         address={user.smartWallet}
-                        // hide_small_balances
-
                         on_transfer_click={(e: any) => {
-                            router.push(`/transfers/${e.chain_name}/${e.contract_address}`)
+                            // router.push(`/transfers/${e.chain_name}/${e.contract_address}`)
                         }}
                     />
                 )}
             </Box>
-
-
 
         </Box>
     );
