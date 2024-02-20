@@ -1,11 +1,12 @@
 
-import { Button, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Text, VStack, Box, Center } from "@chakra-ui/react";
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useEffect } from "react";
+import { Button, Menu, MenuButton, MenuList, MenuDivider, Box, Center } from "@chakra-ui/react";
+import { useConnect } from '@particle-network/auth-core-modal';
+import { useRouter } from "next/router";
 import { FaExchangeAlt, FaSignOutAlt } from "react-icons/fa";
 
 const AccountSwitcher = () => {
-    const { connect, disconnect, connected, } = useConnect();
+    const { disconnect, } = useConnect();
+    const router = useRouter()
 
     return (
         <Menu>
@@ -23,7 +24,11 @@ const AccountSwitcher = () => {
                     justifyContent={"center"}
                     alignItems="center"
                     as="button"
-                    onClick={disconnect}
+                    onClick={() => {
+                        disconnect();
+                        localStorage.clear();
+                        router.push("/intro")
+                    }}
                 >
                     <FaSignOutAlt />
                     <Center>
