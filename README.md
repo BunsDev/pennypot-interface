@@ -1,6 +1,14 @@
-[PennyPot.xyz]() is an automatable savings protocol where users can opt-in tokens for diverse strategies, manage upkeeps, and remit round-down savings. PPot integrates Particle Network Auth for seamless wallet creation, Covalent's Goldrushkit & API for token insights, and Chainlink Functions for frontend and backend automation.
-
 ## Pennypot Client:
+
+#### Code Shortcuts
+
+- [Chainlink Functions Code](https://github.com/penny-pot/pennypot/blob/main/src/pages/api/build-request.ts)
+
+- [GoldrushKit Code](https://github.com/penny-pot/pennypot/blob/main/src/components/Home/tokenTable.tsx)
+
+- [Unified API Code](https://github.com/penny-pot/pennypot/blob/main/src/pages/api/get-user-tokens.ts)
+
+- [Particle Auth](https://github.com/penny-pot/pennypot/blob/main/src/pages/intro.tsx)
 
 | Particle Network Integration                                                                                                              |
 | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -16,6 +24,3 @@
 | Chainlink Functions SDK                                                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Chainlink Fuctions SDK enables up to perform off-chain request computations, uploading secrets and then delivering the request as bytes-string for the user to submit to the automation contract, alongside an opt-in call. |
-
-
-

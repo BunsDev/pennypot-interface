@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Select, Button, Center, useToast } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Select, Text, Button, Center, useToast, HStack } from '@chakra-ui/react';
 import pennypotABI from "@/utils/penyypot.json";
 import sagelockABI from "@/utils/safeLock.json";
 import tokenABI from "@/utils/token.json";
@@ -12,6 +12,7 @@ import { ethers } from 'ethers';
 import { useAppContext } from '@/contexts/globalContext';
 import { shortenAddress } from '@/utils/helpers';
 import axios from 'axios';
+import { FaEye } from 'react-icons/fa';
 
 
 
@@ -24,14 +25,12 @@ const QuestTable = () => {
     const [selectedTokens, setSelectedTokens] = useState<string[]>([]);
 
     const toast = useToast();
-
     // handle token change for a specific quest
     const handleTokenChange = (event: React.ChangeEvent<HTMLSelectElement>, index: number) => {
         const newSelectedTokens = [...selectedTokens];
         newSelectedTokens[index] = event.target.value;
         setSelectedTokens(newSelectedTokens);
     };
-
 
     const fetchClonesByStrategy = async () => {
 
@@ -113,8 +112,6 @@ const QuestTable = () => {
 
     // Function to fetch tokens from the API
     const buildRequest = async (token: string) => {
-
-
         try {
             const response = await axios.get(`/api/build-request/?chain=avalanche-testnet&wallet=${user.smartWallet}&token=${token}`);
             return response.data.hash;
@@ -122,7 +119,6 @@ const QuestTable = () => {
             console.error('Error fetching tokens:', error);
         }
     };
-
 
     const handleOptIn = async (pot: string, token: string) => {
         console.log(token)        // return
@@ -167,7 +163,6 @@ const QuestTable = () => {
 
             const contract = new ethers.Contract(_contractAddress, abi, customProvider);
 
-            //optIn txn
             const data2 = contract.interface.encodeFunctionData(methodName2, methodParams2);
 
             const tx = {
@@ -231,17 +226,25 @@ const QuestTable = () => {
                         <Td>
                             {quest.tokens.find((token: any) => token.address === selectedTokens[index])?.share!}
                         </Td>
-                        {/* Display status of selected token */}
-                        {/* <Td>
-                            {quest.tokens.find((token: any) => token.address === selectedTokens[index])?.status ? "Active" : "Inactive"}
-                        </Td> */}
-                        {/* Button to opt in */}
+
                         <Td>
-                            {quest.tokens.some((token: any) => token.status) ? "Active" : (
-                                <Center>
-                                    <Button onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
-                                </Center>
-                            )}
+                            {quest.tokens.some((token: any) => token.status) ? <>
+                                <HStack>
+                                    <Button
+                                        colorScheme='green'
+                                        bg="green.500"
+                                        rightIcon={<FaEye />}
+                                    >Active</Button>
+
+                                </HStack>
+                            </>
+
+
+                                : (
+                                    <Center>
+                                        <Button onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
+                                    </Center>
+                                )}
                         </Td>
                     </Tr>
                 ))}

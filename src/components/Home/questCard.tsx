@@ -112,11 +112,12 @@ const QuestCard = () => {
                                     bg: "#d9f0f8",
                                     color: "blue.500"
                                 }}
+                                isDisabled={true}
                                 leftIcon={<GiJoin />}
-                                onClick={() => {
-                                    setModal("join");
-                                    onOpen();
-                                }}
+                                // onClick={() => {
+                                //     setModal("join");
+                                //     onOpen();
+                                // }}
                                 h="50px" w="100%" colorScheme="green">Join New Quest</Button>
                         </HStack>
 

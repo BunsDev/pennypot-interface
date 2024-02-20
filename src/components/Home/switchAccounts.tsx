@@ -13,9 +13,9 @@ const AccountSwitcher = () => {
                 Actions
             </MenuButton>
             <MenuList>
-                <MenuItem>New Quest</MenuItem>
+                {/* <MenuItem>New Quest</MenuItem>
                 <MenuItem>Join Quest</MenuItem>
-                <MenuItem>Edit Profile</MenuItem>
+                <MenuItem>Edit Profile</MenuItem> */}
                 <MenuDivider />
 
                 <Box pt={4} px={1} color="red.500" display="flex" alignItems="center"
