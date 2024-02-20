@@ -48,7 +48,7 @@ const IntroPage: React.FC = () => {
                 setLoading(true)
             } else {
                 setLoading(false)
-                router.push("/invite");
+                router.push("/");
             }
         }
     }, [connected, userInfo])

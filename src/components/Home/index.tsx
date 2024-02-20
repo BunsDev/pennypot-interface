@@ -45,10 +45,10 @@ const Home: React.FC = () => {
         <Box w="100%">
 
             <NavBar />
-
+            {/* 
             <Banner
                 title='Your Account'
-            />
+            /> */}
 
             <VStack
                 py={8}
