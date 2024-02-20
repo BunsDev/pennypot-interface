@@ -1,29 +1,21 @@
-import { primaryGradient } from '@/utils/consts';
-import { Box, Flex, Text, Link, Button, Container, HStack, Stack, useClipboard } from '@chakra-ui/react';
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useEffect, useState } from 'react';
+import { Box, Text, Button, Container, HStack, Stack } from '@chakra-ui/react';
 import { GiJoin } from 'react-icons/gi';
 import { IoAddCircleOutline } from 'react-icons/io5';
-import QuestTable from './questTable';
 import { FaStar } from 'react-icons/fa6';
-import { useAppContext } from '@/contexts/globalContext';
-import TokensCard from './tokensCard';
-import CreateNewQuestModal from '../modals/create/createNewQuestModal';
 import { useModalProvider } from '@/contexts/modalContext';
+import { primaryGradient } from '@/utils/consts';
+import CreateNewQuestModal from '../modals/create/createNewQuestModal';
+import QuestTable from './questTable';
+import TokensCard from './tokensCard';
+
+
 
 
 
 
 const QuestCard = () => {
 
-
-    const { provider } = useEthereum();
-    const { connect, disconnect, connected, } = useConnect();
-    const { userInfo, } = useAuthCore();
-    const { user, setUser, balance, setBalance } = useAppContext()
-    const [showTooltip2, setShowTooltip2] = useState(false);
-    const { onCopy, setValue } = useClipboard(userInfo?.wallets.find((wallet) => wallet.chain_name === "evm_chain")!["public_address"] || "")
-    const { isOpen, onClose, onOpen, modal, setModal } = useModalProvider();
+      const { isOpen, onClose, onOpen, modal, setModal } = useModalProvider();
 
     return (
         <>

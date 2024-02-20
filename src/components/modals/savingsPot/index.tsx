@@ -11,9 +11,10 @@ import {
     Text,
     Box,
     HStack,
-    Center,
     VStack,
-    Divider
+    Divider,
+    useClipboard,
+    Tooltip
 } from '@chakra-ui/react';
 import { PotToken } from '@/utils/consts';
 import tokenABI from "@/utils/token.json";
@@ -24,7 +25,7 @@ import { BiCopy } from 'react-icons/bi';
 const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boolean, onClose: () => void, savingsPotDetails: PotToken | any }) => {
     const [increasingCap, setIncreasingCap] = useState(false);
     const { user } = useAppContext()
-    const [invitingFriends, setInvitingFriends] = useState(false);
+    const [setInvitingFriends] = useState(false);
     const [fetching, setFetching] = useState(true)
     const [total, setTotal] = useState(0);
     const [cap, setCap] = useState(0);
@@ -35,18 +36,27 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
         month: 'long',
         year: 'numeric'
     });
+    const [showTooltip2, setShowTooltip2] = useState(false);
+    const { onCopy, setValue } = useClipboard(savingsPotDetails.quest.clone)
+
 
     const handleIncreaseCap = () => {
         setIncreasingCap(true);
     };
 
     const handleInviteFriends = () => {
-        setInvitingFriends(true);
+        onCopy();
+        setShowTooltip2(true);
+        setTimeout(() => {
+            setShowTooltip2(false);
+        }, 2000);
     };
 
 
+
+
     const getTotalSupply = async () => {
-        console.log(savingsPotDetails);
+        // console.log(savingsPotDetails);
         if (!savingsPotDetails) {
             return
         }
@@ -56,7 +66,7 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
         const _total = await tokenContract.balanceOf(savingsPotDetails.quest.clone);
         setTotal(parseFloat((Number(_total / 1e18).toFixed(3))));
         const allowance = await tokenContract.allowance(user.smartWallet, savingsPotDetails.quest.clone);
-        console.log("normal allowance", Number(allowance));
+        // console.log("normal allowance", Number(allowance));
         setCap(parseFloat((Number(allowance / 1e18).toFixed(3))));
         setLastToken(savingsPotDetails.address)
         setFetching(false);
@@ -159,6 +169,9 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
                         <Box color={"blue.500"} maxW={"60%"}>
                             <Text>Invite friends to join your Savings Quest</Text>
                         </Box>
+                        {showTooltip2 && <Tooltip label="Copied"
+                            isOpen={showTooltip2} placement="top"><Box />
+                        </Tooltip>}
                         <Button
                             size={"sm"}
                             colorScheme="blue"

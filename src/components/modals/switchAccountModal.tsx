@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, HStack, Text, Tooltip, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, List, ListItem, Image, useClipboard, Divider, Flex, Switch } from "@chakra-ui/react";
 import { BiCopy } from "react-icons/bi";
-import { FaCheckCircle, FaSignOutAlt } from "react-icons/fa";
 import { renderAvatar, shortenAddress } from '@/utils/helpers';
 import { useAuthCore, useConnect } from '@particle-network/auth-core-modal';
 import { useAppContext } from '@/contexts/globalContext';

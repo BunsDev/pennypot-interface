@@ -1,21 +1,16 @@
-import { primaryBg, primaryGradient, successGradient } from '@/utils/consts';
+import { primaryGradient } from '@/utils/consts';
 import { renderAvatar, shortenAddress } from '@/utils/helpers';
-import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip } from '@chakra-ui/react';
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
+import { Box, Flex, Text, Button, Container, HStack, Stack, useClipboard, Tooltip } from '@chakra-ui/react';
+import {useAuthCore } from '@particle-network/auth-core-modal';
 import { useEffect, useState } from 'react';
 import { BiCopy } from 'react-icons/bi';
 import { GiJoin } from 'react-icons/gi';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import QuestTable from './questTable';
-import { GradientButton } from '../Buttons';
 import AccountSwitcher from './switchAccounts';
 
 
 const ActiveCard = () => {
-
-
-    const { provider } = useEthereum();
-    const { connect, disconnect, connected } = useConnect();
     const { userInfo } = useAuthCore();
     const [user, setUser] = useState<any | null>(null);
     const [showTooltip2, setShowTooltip2] = useState(false);
@@ -33,16 +28,13 @@ const ActiveCard = () => {
         }
     }, [userInfo])
 
-
     const handleCopy = (value: string) => {
-        // alert(value);
         onCopy();
         setShowTooltip2(true);
         setTimeout(() => {
             setShowTooltip2(false);
         }, 2000);
     };
-
 
 
 
@@ -93,10 +85,6 @@ const ActiveCard = () => {
                         w="100%"
                         mt={0}
                         borderTop={"none"}
-                    // borderBottom={"2px solid #e2e8f0"}
-                    // borderRight={"2px solid #e2e8f0"}
-                    // borderLeft={"2px solid #e2e8f0"}
-                    // maxW="container.lg"
                     >
                         <Box>
                             <Text fontWeight={"semibold"}>Active Quests</Text>

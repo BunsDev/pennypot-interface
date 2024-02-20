@@ -1,32 +1,15 @@
-import { primaryBg, primaryGradient, successGradient } from '@/utils/consts';
-import { renderAvatar, shortenAddress } from '@/utils/helpers';
-import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip, useDisclosure } from '@chakra-ui/react';
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useEffect, useState } from 'react';
-import { IoAddCircleOutline } from 'react-icons/io5';
-import QuestTable from './questTable';
-import { FaStar } from 'react-icons/fa6';
+import { primaryGradient } from '@/utils/consts';
+import { Box, Container, VStack } from '@chakra-ui/react';
 import { useAppContext } from '@/contexts/globalContext';
-import { GiJoin } from 'react-icons/gi';
 import TokenTable from './tokenTable';
 
 
-
-
 const TokensCard = () => {
-
-
-    const { provider } = useEthereum();
-    const { connect, disconnect, connected, } = useConnect();
-    const { userInfo, } = useAuthCore();
-    const { user, setUser, balance, setBalance } = useAppContext()
-    const [showTooltip2, setShowTooltip2] = useState(false);
-    const { isOpen, onClose, onOpen } = useDisclosure();
+    const { user} = useAppContext()
 
     return (
         <VStack>
             {user && (
-
                 <Box
                     w="fit-content"
                     position={"relative"}
@@ -76,7 +59,6 @@ const TokensCard = () => {
                     </Container>
                 </Box >
             )}
-
         </VStack>
     );
 };

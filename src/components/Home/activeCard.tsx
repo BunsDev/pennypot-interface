@@ -1,9 +1,6 @@
-import { primaryBg, primaryGradient, successGradient } from '@/utils/consts';
-import { renderAvatar, shortenAddress } from '@/utils/helpers';
-import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip, useDisclosure } from '@chakra-ui/react';
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
-import { useEffect, useState } from 'react';
-import SwitchAccountModal from '../modals/switchAccountModal';
+import { Box } from '@chakra-ui/react';
+import { useEthereum, useAuthCore } from '@particle-network/auth-core-modal';
+import { useEffect, } from 'react';
 import { AvalancheTestnet } from '@particle-network/chains';
 import { AAWrapProvider, SendTransactionMode, SmartAccount } from '@particle-network/aa';
 import { ethers } from 'ethers';
@@ -12,18 +9,11 @@ import QuestCard from './questCard';
 import LoggedInBanner from './loggedInBanner';
 
 
-
-
 const ActiveCard = () => {
 
-
     const { provider } = useEthereum();
-    const { connect, disconnect, connected, } = useConnect();
     const { userInfo, } = useAuthCore();
-    const { user, setUser, balance, setBalance } = useAppContext()
-    const [showTooltip2, setShowTooltip2] = useState(false);
-    const { onCopy, setValue } = useClipboard(userInfo?.wallets.find((wallet) => wallet.chain_name === "evm_chain")!["public_address"] || "")
-    const { isOpen, onClose, onOpen } = useDisclosure();
+    const { user, setUser, setBalance } = useAppContext()
 
 
     const smartAccount = new SmartAccount(provider, {
@@ -62,14 +52,12 @@ const ActiveCard = () => {
     }, [userInfo, smartAccount, user])
 
 
-
     return (
         <>
             <Box
                 w="100%"
                 px={[4, 4, 12]}
                 pb={8}
-                // overflowX={"auto"}
                 position={"relative"}
             >
                 <Box>
@@ -78,9 +66,7 @@ const ActiveCard = () => {
                 <Box>
                     <QuestCard />
                 </Box>
-
             </Box >
-
         </>
     );
 };

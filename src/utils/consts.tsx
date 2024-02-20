@@ -1,5 +1,3 @@
-import { requireNotNullish } from "@particle-network/auth-core";
-
 export const primaryGradient = ['#0070F3', '#00B4D8'];
 export const primaryBg = "blue.50";
 export const blackGradient = ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 1)'];

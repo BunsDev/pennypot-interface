@@ -1,5 +1,5 @@
 import { renderAvatar, shortenAddress } from '@/utils/helpers';
-import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Text, HStack, Stack, useClipboard, Tooltip, useDisclosure } from '@chakra-ui/react';
 import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
 import { useEffect, useState } from 'react';
 import AccountSwitcher from './switchAccounts';
@@ -15,16 +15,10 @@ import { useAppContext } from '@/contexts/globalContext';
 
 const LoggedInBanner = () => {
 
-
     const { provider } = useEthereum();
-    const { connect, disconnect, connected, } = useConnect();
     const { userInfo, } = useAuthCore();
     const { user, setUser, balance, setBalance } = useAppContext()
-    const [showTooltip2, setShowTooltip2] = useState(false);
-    const { onCopy, setValue } = useClipboard(userInfo?.wallets.find((wallet) => wallet.chain_name === "evm_chain")!["public_address"] || "")
     const { isOpen, onClose, onOpen } = useDisclosure();
-
-
 
 
     const smartAccount = new SmartAccount(provider, {
@@ -35,16 +29,6 @@ const LoggedInBanner = () => {
             simple: [{ chainId: AvalancheTestnet.id, version: '1.0.0' }]
         }
     });
-
-
-
-    const handleCopy = (value: string) => {
-        onCopy();
-        setShowTooltip2(true);
-        setTimeout(() => {
-            setShowTooltip2(false);
-        }, 2000);
-    };
 
     const fetchBalance = async () => {
         if (!userInfo) {
@@ -69,7 +53,6 @@ const LoggedInBanner = () => {
             fetchBalance();
         }
     }, [userInfo, smartAccount, user])
-
 
 
     return (

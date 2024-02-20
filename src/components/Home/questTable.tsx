@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Select, Spinner, Text, Button, Center, useToast, HStack, useDisclosure, TableCaption, Box } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Select, Text, Button, Center, useDisclosure, Box } from '@chakra-ui/react';
 import pennypotABI from "@/utils/penyypot.json";
 import sagelockABI from "@/utils/safeLock.json";
 import tokenABI from "@/utils/token.json";
@@ -30,9 +30,6 @@ const QuestTable = () => {
     const { isOpen, onClose, onOpen } = useDisclosure();
     const [selectedQuestToken, setSelectedQuestToken] = useState<any | PotToken>(null)
     const [loading, setLoading] = useState(false);
-
-    const toast = useToast();
-
 
     const handleTokenChange = (event: React.ChangeEvent<HTMLSelectElement>, index: number) => {
         const newSelectedTokens = [...selectedTokens];
@@ -84,7 +81,7 @@ const QuestTable = () => {
                         SN: Number(userStatus[3]),
 
                     }
-                    console.log("user stat", userStatus);
+                    // console.log("user stat", userStatus);
                     _tokens.push(tokenObj)
                 }
                 const obj = {
@@ -95,7 +92,7 @@ const QuestTable = () => {
                 _quests.push(obj);
             }
             setQuests(_quests as any)
-            console.log("total quests", _quests)
+            // console.log("total quests", _quests)
             setFetchingSavings(false);
             return _quests;
         } catch (e) {
@@ -129,7 +126,7 @@ const QuestTable = () => {
     };
 
     const handleOptIn = async (pot: string, token: string) => {
-        console.log(token)        // return
+        // console.log(token)        // return
         const _contractAddress = PENNYPOT_ADDRESS as string;
         const abi = pennypotABI;
         setLoading(true);
@@ -187,7 +184,7 @@ const QuestTable = () => {
             }
             //@ts-ignore
             const txResponse = await smartAccount.sendTransaction(tx);
-            console.log(`Opt in transaction Complete. https://subnets-test.avax.network/c-chain/tx/${txResponse}`)
+            // console.log(`Opt in transaction Complete. https://subnets-test.avax.network/c-chain/tx/${txResponse}`)
             alert(`Opt in complete. Refresh page`);
             setLoading(false)
 
@@ -253,7 +250,7 @@ const QuestTable = () => {
                                                 quest
                                             }
                                             setSelectedQuestToken(obj);
-                                            console.log("checked", obj)
+                                            // console.log("checked", obj)
                                             onOpen();
                                         }}
                                     >Active</Button>
