@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         }}
       >
-        <ChakraProvider resetCSS={true}>
+        <ChakraProvider resetCSS={false}>
           <GoldRushProvider apikey={COVALENT_API_KEY || ""} mode={mode} color={"slate"} border_radius={"medium"}>
             <ModalProvider>
               <Component {...pageProps} />

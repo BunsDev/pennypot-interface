@@ -29,6 +29,7 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
     const [total, setTotal] = useState(0);
     const [cap, setCap] = useState(0);
     const unlockDate = new Date(Number(savingsPotDetails.timestamp) * 1000); // Ensure timestamp is in milliseconds
+    const [lastToken, setLastToken] = useState("");
     const formattedUnlockDate = unlockDate.toLocaleDateString('en-US', {
         day: "numeric",
         month: 'long',
@@ -57,6 +58,7 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
         const allowance = await tokenContract.allowance(user.smartWallet, savingsPotDetails.quest.clone);
         console.log("normal allowance", Number(allowance));
         setCap(parseFloat((Number(allowance / 1e18).toFixed(3))));
+        setLastToken(savingsPotDetails.address)
         setFetching(false);
     }
 
@@ -64,7 +66,15 @@ const SavingsPotModal = ({ isOpen, onClose, savingsPotDetails }: { isOpen: boole
         if (savingsPotDetails && fetching) {
             getTotalSupply();
         }
-    }, [fetching, savingsPotDetails])
+    }, [fetching, savingsPotDetails.address])
+
+
+    useEffect(() => {
+        if (savingsPotDetails && lastToken !== savingsPotDetails.address) {
+            setFetching(true)
+        }
+    }, [lastToken, savingsPotDetails.address])
+
 
 
 

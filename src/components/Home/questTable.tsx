@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Select, Spinner, Text, Button, Center, useToast, HStack, useDisclosure } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Select, Spinner, Text, Button, Center, useToast, HStack, useDisclosure, TableCaption, Box } from '@chakra-ui/react';
 import pennypotABI from "@/utils/penyypot.json";
 import sagelockABI from "@/utils/safeLock.json";
 import tokenABI from "@/utils/token.json";
@@ -14,6 +14,7 @@ import { shortenAddress } from '@/utils/helpers';
 import axios from 'axios';
 import { FaEye } from 'react-icons/fa';
 import SavingsPotModal from '../modals/savingsPot';
+import AnimatedSpinner from '../AnimatedSpinner';
 
 
 
@@ -260,35 +261,42 @@ const QuestTable = () => {
 
                                     : (
                                         <Center>
-                                            <Button 
-                                            isLoading={loading}
-                                            onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
+                                            <Button
+                                                isLoading={loading}
+                                                onClick={() => handleOptIn(quest.clone, selectedTokens[index])}>Opt in</Button>
                                         </Center>
                                     )}
                             </Td>
                         </Tr>
                     ))}
 
-                    {quests && quests.length < 1 && (
-                        <>
-                            <Text fontSize={"sm"} opacity={0.7}>No Quests Created</Text>
-                        </>
-                    )}
-
-                    {!quests && (
-                        <Center>
-                            <Spinner />
-                        </Center>
-                    )}
-
 
                 </Tbody>
             </Table>
 
+
+            <Box mt={4} display={"flex"} justifyContent={"center"}>
+                <Box position={"relative"}
+                    h="40px"
+                    w="40px"
+                >
+                    {user && !quests && (
+                        <AnimatedSpinner />
+                    )}
+
+
+                    {quests && quests.length < 1 && (
+                        <Box>
+                            <Text fontSize={"sm"} opacity={0.7}>No Quests Created</Text>
+                        </Box>
+                    )}
+                </Box>
+
+            </Box>
+
             {selectedQuestToken && (
                 <SavingsPotModal isOpen={isOpen} onClose={onClose} savingsPotDetails={selectedQuestToken} />
             )}
-
         </>
     );
 };
