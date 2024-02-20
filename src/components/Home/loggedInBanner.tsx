@@ -87,7 +87,8 @@ const LoggedInBanner = () => {
                 >
                     <Box fontSize={["sm", "sm", "sm", "md"]}>You're logged in as  </Box>
 
-                    <HStack
+                    <Stack
+                        direction={["column", "column", "row"]}
                         w="100%"
                         spacing={12}
                         justifyContent={"flex-start"}
@@ -148,7 +149,7 @@ const LoggedInBanner = () => {
                             </Box>
                         </Box>
 
-                    </HStack>
+                    </Stack>
 
                 </Box >
             )}

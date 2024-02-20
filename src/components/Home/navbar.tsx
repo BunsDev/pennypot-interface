@@ -1,20 +1,11 @@
 
-import { useEffect, useState } from 'react';
-import { Box, Flex, Text, Link, Button, Container, HStack, Center, VStack, Heading, Divider, Stack, useClipboard, Tooltip } from '@chakra-ui/react';
-import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
+import { Box, Flex, Text, HStack } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
-import { useAppContext } from '@/contexts/globalContext';
 import { useModalProvider } from '@/contexts/modalContext';
 
 
 const NavBar: React.FC = () => {
 
-
-    const { } = useAppContext();
-    const { provider } = useEthereum();
-    const { connect, disconnect, connected } = useConnect();
-    const { userInfo } = useAuthCore();
-    const [user, setUser] = useState<any | null>(null);
     const { isOpen } = useModalProvider();
 
 
@@ -49,9 +40,6 @@ const NavBar: React.FC = () => {
                             as="img"
                             src="/logohead.png"
                         />
-
-
-
                     </Box>
 
                     {/* Links */}
@@ -65,10 +53,12 @@ const NavBar: React.FC = () => {
                             borderBottom={"1px solid white"}
                             justifyContent={"center"} alignContent={"center"} as="a" display={"flex"}>
                             <FaGithub />
-                            <Text>Source</Text>
+                            <Text
+                                as="a"
+                                target='_blank'
+                                href='https://github.com/penny-pot/pennypot/'
+                            >Source</Text>
                         </HStack>
-                        {/* <Link>Tab 2</Link>
-                        <Link>Tab 3</Link> */}
                     </HStack>
                 </Flex>
             </Box >

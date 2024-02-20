@@ -121,7 +121,11 @@ const QuestCard = () => {
                                 h="50px" w="100%" colorScheme="green">Join New Quest</Button>
                         </HStack>
 
-                        <QuestTable />
+                        <Box
+                            overflowX={"auto"}
+                        >
+                            <QuestTable />
+                        </Box>
 
                     </Container>
                 </Box >

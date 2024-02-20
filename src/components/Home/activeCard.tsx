@@ -69,9 +69,15 @@ const ActiveCard = () => {
                 w="100%"
                 px={[4, 4, 12]}
                 pb={8}
+                // overflowX={"auto"}
+                position={"relative"}
             >
-                <LoggedInBanner />
-                <QuestCard />
+                <Box>
+                    <LoggedInBanner />
+                </Box>
+                <Box>
+                    <QuestCard />
+                </Box>
 
             </Box >
 
