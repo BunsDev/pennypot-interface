@@ -121,7 +121,7 @@ const QuestTable = () => {
             const response = await axios.get(`/api/build-request/?chain=avalanche-testnet&wallet=${user.smartWallet}&token=${token}`);
             return response.data.hash;
         } catch (error) {
-            console.error('Error fetching tokens:', error);
+            console.error('Error Building tokens:', error);
         }
     };
 

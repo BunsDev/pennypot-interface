@@ -43,7 +43,7 @@ import { title } from 'process';
 import TxnReceipt from './receipt';
 
 const CreateNewQuestModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: any }) => {
-    const { user, chainName } = useAppContext()
+    const { user, chainName, fetchUsersTokens } = useAppContext()
     const { provider } = useEthereum();
     const [selectedStrategy, setSelectedStrategy] = useState('');
     const [selectedTokens, setSelectedTokens] = useState<string[]>([]);
@@ -60,10 +60,14 @@ const CreateNewQuestModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: an
 
     const fetchTokens = async () => {
         try {
-            const response = await axios.get(`/api/get-user-tokens/?chain=${chainName}&wallet=${user.smartWallet}`);
-            console.log("founded", response.data.tokens)
-            setTokens(response.data.tokens.filter((token: any) => token.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
-            setFilteredTokens(tokens);
+            const response =
+                // await axios.get(`/api/get-user-tokens/?chain=${chainName}&wallet=${user.smartWallet}`);
+                await fetchUsersTokens(chainName, user.smartWallet);
+            if (response) {
+                // console.log("found tokens", response.tokens)
+                setTokens(response.tokens.filter((token: any) => token.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
+                setFilteredTokens(tokens);
+            }
         } catch (error) {
             console.error('Error fetching tokens:', error);
         }

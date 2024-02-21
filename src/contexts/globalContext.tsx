@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { CovalentClient } from "@covalenthq/client-sdk";
 
 
 type AppContextType = {
@@ -15,6 +16,7 @@ type AppContextType = {
     setBalance: React.Dispatch<React.SetStateAction<number>>;
     chainName: string;
     setChainName: React.Dispatch<React.SetStateAction<string>>;
+    fetchUsersTokens: (chain: any, wallet: string) => any
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -49,6 +51,37 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children, set }: any) 
     }, [showWallet])
 
 
+    const fetchUsersTokens = async (chain: any, wallet: string) => {
+        const covalentApiKey = process.env.NEXT_PUBLIC_COVALENT_API_KEY;
+        if (!covalentApiKey) {
+            console.error({ error: "no covalent key found" });
+        }
+        const client = new CovalentClient(covalentApiKey as string);
+        try {
+            const resp =
+                await client.BalanceService.getHistoricalPortfolioForWalletAddress(
+                    chain,
+                    wallet
+                );
+            if (resp && resp.data) {
+                const tokens = resp.data.items;
+                const processedTokens = tokens.map((token: any) => ({
+                    name: token.contract_name,
+                    symbol: token.contract_ticker_symbol,
+                    logo: token.logo_url,
+                    address: token.contract_address,
+                }));
+
+                const res = { tokens: processedTokens };
+                return res;
+            }
+        } catch (error) {
+            console.error(error);
+            console.log({ error: "Internal Server Error" });
+        }
+    }
+
+
 
 
 
@@ -64,7 +97,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children, set }: any) 
         balance,
         setBalance,
         chainName,
-        setChainName
+        setChainName,
+        fetchUsersTokens
     };
 
     return (

@@ -1,4 +1,3 @@
-// This is a simplified example, adjust it according to your project structure and requirements
 
 // import axios from "axios";
 import { CovalentClient } from "@covalenthq/client-sdk";
@@ -11,9 +10,6 @@ export default async function handler(req: any, res: any) {
   const client = new CovalentClient(covalentApiKey as string);
 
   try {
-    console.log(req.query.chain);
-
-  
     const resp =
       await client.BalanceService.getHistoricalPortfolioForWalletAddress(
         req.query.chain,
