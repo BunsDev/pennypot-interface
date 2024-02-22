@@ -26,6 +26,7 @@
     "animejs": "^3.2.2",
     "auth-core-modal": "link:@particle-network/auth-core-modal",
     "axios": "^1.6.7",
+    "bcrypt": "^5.1.1",
     "ethers": "^5.7.2",
     "framer-motion": "^11.0.5",
     "lottie-react": "^2.4.0",
