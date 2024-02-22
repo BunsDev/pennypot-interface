@@ -20,7 +20,7 @@ export default async function handler(req: any, res: any) {
 
     const args = [req.query.chain, req.query.wallet, req.query.token];
 
-    const secrets = { apiKey: process.env.NEXT_PUBLIC_COVALENT_API_KEY };
+    const secrets = { apiKey: process.env.COVALENT_API_KEY };
     if (!secrets.apiKey) {
       res.status(500).json({ error: "no secrets found" });
     }

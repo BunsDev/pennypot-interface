@@ -17,7 +17,7 @@ const TokenTable = () => {
     useEffect(() => {
         if (chainInfo && chains && user && chainName.length < 2) {
             const x = chains?.filter((x) => Number(x.chain_id) === chainInfo.id)[0]
-            console.log("chain name", x.name)
+            // console.log("chain name", x.name)
             setChainName(x.name)
         }
     }, [chainInfo, chains, chainName])
@@ -31,13 +31,11 @@ const TokenTable = () => {
             position={"relative"}
         >
             <Box>
-                {chainName && (
+                {chainName && user.smartWallet && (
                     <TokenBalancesListView
                         chain_names={[chainName]}
                         address={user.smartWallet}
-                        on_transfer_click={(e: any) => {
-                            // router.push(`/transfers/${e.chain_name}/${e.contract_address}`)
-                        }}
+                        on_transfer_click={(e: any) => { }}
                     />
                 )}
             </Box>

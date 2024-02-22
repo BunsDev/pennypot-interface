@@ -62,7 +62,7 @@ const CreateNewQuestModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: an
         try {
             const response =
                 // await axios.get(`/api/get-user-tokens/?chain=${chainName}&wallet=${user.smartWallet}`);
-                await fetchUsersTokens(chainName, user.smartWallet);
+                await fetchUsersTokens(chainName, user.smartWallet); //for Next Demo, use API for localhost or enter hosted server
             if (response) {
                 // console.log("found tokens", response.tokens)
                 setTokens(response.tokens.filter((token: any) => token.address !== "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
