@@ -31,7 +31,9 @@ const IntroPage: React.FC = () => {
 
 
     const handleLogin = async (authType: any) => {
-        setLoading(true)
+        if (authType.length > 2) {
+            setLoading(true)
+        }
         if (!userInfo) {
             await connect({
                 socialType: authType,
